@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: Event Booking API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000/api
+
+paths:
+  /events:
+    get:
+      summary: Get all events
+      responses:
+        200:
+          description: Success
+
+    post:
+      summary: Create event
+      requestBody:
+        required: true
+      responses:
+        201:
+          description: Event created
+
+  /bookings:
+    post:
+      summary: Book ticket
+
+  /users/{id}/bookings:
+    get:
+      summary: Get user bookings
+
+  /events/{id}/attendance:
+    post:
+      summary: Mark attendance
