@@ -3,11 +3,13 @@ const db = require("../config/db");
 exports.getEvents = async (req, res) => {
     try {
         const [events] = await db.query("SELECT * FROM events");
+
         res.json({
             success: true,
             message: "Events fetched successfully",
             data: events,
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -17,7 +19,9 @@ exports.getEvents = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
-    //validation 
+    const { title, description, date, capacity } = req.body;
+
+    // validation
     if (!title || !date || !capacity) {
         return res.status(400).json({
             success: false,
@@ -26,8 +30,6 @@ exports.createEvent = async (req, res) => {
     }
 
     try {
-        const { title, description, date, capacity } = req.body;
-
         await db.query(
             "INSERT INTO events (title, description, date, total_capacity, remaining_tickets) VALUES (?,?,?,?,?)",
             [title, description, date, capacity, capacity]
@@ -37,6 +39,7 @@ exports.createEvent = async (req, res) => {
             success: true,
             message: "Event created successfully",
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -46,16 +49,18 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.markAttendance = async (req, res) => {
-    if (!title || !date || !capacity) {
+    const { code } = req.body;
+
+    // validation
+    if (!code) {
         return res.status(400).json({
             success: false,
-            message: "Title, date and capacity required",
+            message: "Booking code required",
         });
     }
-    try {
-        const { code } = req.body;
 
-        const [result] = await db.query(
+    try {
+        await db.query(
             "INSERT INTO attendance (booking_code) VALUES (?)",
             [code]
         );
@@ -64,6 +69,7 @@ exports.markAttendance = async (req, res) => {
             success: true,
             message: "Attendance marked successfully",
         });
+
     } catch (error) {
         res.status(500).json({
             success: false,

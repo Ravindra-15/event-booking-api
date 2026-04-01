@@ -2,24 +2,32 @@ const db = require("../config/db");
 const { v4: uuidv4 } = require("uuid");
 
 exports.bookTicket = async (req, res) => {
-    //Validation
-    if (!title || !date || !capacity) {
+    const { user_id, event_id } = req.body;
+
+    // validation
+    if (!user_id || !event_id) {
         return res.status(400).json({
             success: false,
-            message: "Title, date and capacity required",
+            message: "user_id and event_id required",
         });
     }
+
     const connection = await db.getConnection();
 
     try {
         await connection.beginTransaction();
 
-        const { user_id, event_id } = req.body;
-
         const [event] = await connection.query(
             "SELECT * FROM events WHERE id = ?",
             [event_id]
         );
+
+        if (!event.length) {
+            return res.status(404).json({
+                success: false,
+                message: "Event not found",
+            });
+        }
 
         if (event[0].remaining_tickets <= 0) {
             return res.status(400).json({
@@ -45,10 +53,9 @@ exports.bookTicket = async (req, res) => {
         res.status(201).json({
             success: true,
             message: "Booking successful",
-            data: {
-                bookingCode,
-            },
+            data: { bookingCode },
         });
+
     } catch (error) {
         await connection.rollback();
         res.status(500).json({
