@@ -13,7 +13,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"title\": \"JavaScipt Workshop\",\r\n  \"description\": \"Backend training\",\r\n  \"date\": \"2026-04-11 10:00:00\",\r\n  \"capacity\": 50\r\n}",
+          "raw": "{\r\n  \"title\": \"Backend Workshop\",\r\n  \"description\": \"Backend training\",\r\n  \"date\": \"2026-04-12 10:00:00\",\r\n  \"capacity\": 50\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -21,12 +21,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/api/events",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/api/events",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "events"
@@ -41,12 +39,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/api/events",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/api/events",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "events"
@@ -70,12 +66,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/api/bookings",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/api/bookings",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "bookings"
@@ -90,12 +84,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/api/events",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/api/events",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "events"
@@ -110,12 +102,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5000/api/users/1/bookings",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/api/users/1/bookings",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "users",
@@ -141,12 +131,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5000/api/events/1/attendance",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/api/events/1/attendance",
           "host": [
-            "localhost"
+            "{{baseUrl}}"
           ],
-          "port": "5000",
           "path": [
             "api",
             "events",
@@ -156,6 +144,36 @@
         }
       },
       "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
     }
   ]
 }
