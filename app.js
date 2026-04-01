@@ -16,6 +16,14 @@ app.use(cors());
 app.use(express.json());
 app.use(errorHandler);
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Event Booking API is running",
+    docs: "/api-docs"
+  });
+});
+
 app.use("/api/events", eventRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/users", userRoutes);
